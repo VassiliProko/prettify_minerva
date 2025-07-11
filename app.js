@@ -355,29 +355,29 @@ if (site === "horizon.mcgill.ca") {
         titleNode.querySelector('button')?.remove();
         const title = titleNode.textContent.trim();
         
-        const url = window.location.origin + window.location.pathname + '?name=' + getMenuName();
-        
+        const menuName = getMenuName() || '';
+
+        const urlObj = new URL(window.location.href);
+        urlObj.searchParams.set('name', menuName);
+        const url = urlObj.toString();
+
         let saved = JSON.parse(localStorage.getItem('myQuickLinks') || '[]');
         let isSaved = saved.some(link => link.url === url);
-        quickLinksButton.textContent = isSaved ? 'Remove from Quick Links' : 'Save to Quick Links';
 
+        quickLinksButton.textContent = isSaved ? 'Remove from Quick Links' : 'Save to Quick Links';
 
         quickLinksButton.onclick = () => {
             saved = JSON.parse(localStorage.getItem('myQuickLinks') || '[]');
             isSaved = saved.some(link => link.url === url);
-    
+
             if (isSaved) {
-                // Remove this page from quick links
                 saved = saved.filter(link => link.url !== url);
                 localStorage.setItem('myQuickLinks', JSON.stringify(saved));
                 quickLinksButton.textContent = 'Save to Quick Links';
-                isSaved = false;
             } else {
-                // Add this page to quick links
                 saved.push({ text: title, url });
                 localStorage.setItem('myQuickLinks', JSON.stringify(saved));
                 quickLinksButton.textContent = 'Remove from Quick Links';
-                isSaved = true;
             }
         };
     
