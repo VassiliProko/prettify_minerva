@@ -317,6 +317,8 @@ if (site === "horizon.mcgill.ca") {
         releaseText.insertAdjacentElement('afterend', newFooterText);
     }
 
+    document.querySelector(".pagefooterdiv").classList.add("no-print");
+    document.querySelector(".banner_copyright").classList.add("no-print");
 
 
     (function () {
