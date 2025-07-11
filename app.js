@@ -1,3 +1,15 @@
+// only run script if extension is turned on (popup)
+chrome.storage?.local?.get('enabled', (data) => {
+
+if (!data.enabled) return;
+
+// inject hide.css
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = chrome.runtime.getURL('hide.css');
+document.head.appendChild(link);
+
 const site = window.location.hostname;
 const path = window.location.pathname;
 
@@ -723,3 +735,5 @@ if ((window.location.href.includes("WWWLogin")) && (site === "horizon.mcgill.ca"
     pagetitle.remove();
     
 }
+
+})
