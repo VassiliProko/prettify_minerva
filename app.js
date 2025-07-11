@@ -206,17 +206,6 @@ if (site === "horizon.mcgill.ca") {
             background-color: #d7d7d7 !important;
         }
 
-        table {
-            border-collapse: separate !important;
-            border-spacing: 0 !important;
-            border: none !important;
-            font-size: 14px !important;
-        }
-
-        td {
-            padding: 5px 5px !important;
-        }
-
         mark {
             background-color: #fff9df !important;
             border-left: #ffda16 solid 10px;
@@ -228,8 +217,28 @@ if (site === "horizon.mcgill.ca") {
             border: black solid 1px;
             border-radius: 5px;
         }
+        
+        @media print {
+            .headerwrapperdiv, .no-print {
+                display: none;
+            }
+        
+        }
 
     `);
+
+
+        // table {
+        //     border-collapse: separate !important;
+        //     border-spacing: 0 !important;
+        //     border: none !important;
+        //     font-size: 14px !important;
+        // }
+
+        // td {
+        //     padding: 5px 5px !important;
+        // }
+
     const headerWrapper = document.querySelector("div.headerwrapperdiv");
 
     if (headerWrapper) {
@@ -328,6 +337,7 @@ if (site === "horizon.mcgill.ca") {
         quickLinksButton.style.border = '1px solid #ccc';
         quickLinksButton.style.borderRadius = '4px';
         quickLinksButton.style.backgroundColor = '#f5f5f5';
+        quickLinksButton.classList.add('no-print');
 
         const titleNode = h2.cloneNode(true);
         titleNode.querySelector('button')?.remove();
